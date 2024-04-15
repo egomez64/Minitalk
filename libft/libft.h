@@ -19,9 +19,9 @@
 
 typedef struct s_list
 {
-	void *content;
-	struct s_list *next;
-} t_list;
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 void			ft_bzero(void *s, size_t n);
 unsigned int	ft_strlcpy(char *dst, const char *src, size_t size);

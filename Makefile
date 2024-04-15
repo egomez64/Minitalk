@@ -16,9 +16,7 @@ LIBFT_PATH = libft
 
 LIBFT_ARCHIVE = $(LIBFT_PATH)/libft.a
 
-FT_PRINTF_PATH = ft_printf
-
-FT_PRINTF_ARCHIVE = $(FT_PRINTF_PATH)/libftprintf.a
+FT_PRINTF = ft_printf/libftprintf.a
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -36,16 +34,16 @@ endif
 
 all: $(SERVER_NAME) $(CLIENT_NAME)
 
-$(CLIENT_NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(CLIENT_OBJS)
-	$(CC) $(CLIENT_OBJS) -o $(CLIENT_NAME) $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE)
+$(CLIENT_NAME): $(LIBFT_ARCHIVE) $(CLIENT_OBJS) $(FT_PRINTF)
+	$(CC) $(CLIENT_OBJS) -o $(CLIENT_NAME) $(LIBFT_ARCHIVE) $(FT_PRINTF)
 
-$(SERVER_NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(SERVER_OBJS)
-	$(CC) $(SERVER_OBJS) -o $(SERVER_NAME) $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE)
+$(SERVER_NAME): $(LIBFT_ARCHIVE) $(SERVER_OBJS) $(FT_PRINTF)
+	$(CC) $(SERVER_OBJS) -o $(SERVER_NAME) $(LIBFT_ARCHIVE) $(FT_PRINTF)
 
 $(LIBFT_ARCHIVE):
 	@make -C libft/ all
 
-$(FT_PRINTF_ARCHIVE):
+$(FT_PRINTF):
 	@make -C ft_printf/ all
 
 %.o: %.c $(HEADER)
@@ -58,7 +56,7 @@ clean:
 	
 fclean: clean
 	rm -f $(LIBFT_ARCHIVE)
-	rm -f $(FT_PRINTF_ARCHIVE)
+	rm -f $(FT_PRINTF)
 	rm -f $(SERVER_NAME) $(CLIENT_NAME)
 
 re: fclean all

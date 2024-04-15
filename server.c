@@ -18,22 +18,19 @@ void	bin_to_char(int signal, siginfo_t *info, void *context)
 {
 	static unsigned char	c;
 	static int				i;
-	(void)context;
 
+	(void)context;
 	c <<= 1;
 	if (signal == SIGUSR2)
 		c |= 1;
 	i++;
-	kill(info->si_pid, SIGUSR1);
 	if (i == 8)
 	{
-		if (c == '\0')
-			write(1, "\n", 1);
-		else
-			write(1, &c, 1);
+		write(1, &c, 1);
 		i = 0;
 		c = 0;
 	}
+	kill(info->si_pid, SIGUSR1);
 }
 
 int	main(void)
